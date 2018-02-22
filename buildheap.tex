@@ -1,0 +1,480 @@
+% source: https://github.com/MartinThoma/LaTeX-examples/blob/master/tikz/binary-tree/binary-tree.tex
+% by MartinThoma
+
+\documentclass{article}
+\usepackage[pdftex,active,tightpage]{preview}
+\setlength\PreviewBorder{2mm}
+
+% https://www.sharelatex.com/learn/Tables
+\usepackage{tabu}
+
+% https://www.sharelatex.com/learn/Tables
+\usepackage[table]{xcolor}
+
+% https://tex.stackexchange.com/questions/309833/format-whole-row-of-table-as-bold
+\newcommand\setrow[1]{\gdef\rowmac{#1}#1\ignorespaces}
+\newcommand\clearrow{\global\let\rowmac\relax}
+\clearrow
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning, calc}
+\tikzstyle{vertex}=[draw,fill=black!15,circle,minimum size=20pt,inner sep=0pt]
+
+% latexcolor.com
+\definecolor{awesome}{rgb}{1.0, 0.13, 0.32}
+
+\begin{document}
+\begin{preview}
+
+
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex] (r){$9$}
+  child {
+    node [vertex] (a) {$3$}
+    child {
+      node [vertex] {$4$}
+      child {node [vertex] {$6$}}
+      child {node [vertex] {$1$}}
+    }
+    child {
+      node [vertex] {$5$}
+      child {node [vertex] {$0$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$2$}
+    child {
+      node [vertex] {$7$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{initial binary tree}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    9 & 3 & 2 & 4 & 5 & 7 & 8 & 6 & 1 & 0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+\label{tikz}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex] (r){$9$}
+  child {
+    node [vertex] (a) {$3$}
+    child {
+      node [vertex] {$4$}
+      child {node [vertex] {$6$}}
+      child {node [vertex] {$1$}}
+    }
+    child {
+      node [vertex, fill=awesome] {$5$}
+      child {node [vertex, fill=awesome] {$0$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$2$}
+    child {
+      node [vertex] {$7$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \[max = 10, i = \frac{max}{2} - 1 = 4\]
+    \centerline{5 swaps with 0}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    9 & 3 & 2 & 4 & \cellcolor{awesome}5 & 7 & 8 & 6 & 1 & \cellcolor{awesome}0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+\label{tikz}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex] (r){$9$}
+  child {
+    node [vertex] (a) {$3$}
+    child {
+      node [vertex, fill=awesome] {$4$}
+      child {node [vertex] {$6$}}
+      child {node [vertex, fill=awesome] {$1$}}
+    }
+    child {
+      node [vertex] {$0$}
+      child {node [vertex] {$5$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$2$}
+    child {
+      node [vertex] {$7$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \[max = 10, i-- = 3\]
+    \centerline{4 swaps with 1}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    9 & 3 & 2 & \cellcolor{awesome}4 & 0 & 7 & 8 & 6 & \cellcolor{awesome}1 & 5 \\
+ \hline
+\end{tabular}
+\end{center}
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex] (r){$9$}
+  child {
+    node [vertex] (a) {$3$}
+    child {
+      node [vertex] {$1$}
+      child {node [vertex] {$6$}}
+      child {node [vertex] {$4$}}
+    }
+    child {
+      node [vertex] {$0$}
+      child {node [vertex] {$5$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex, fill=awesome] {$2$}
+    child {
+      node [vertex] {$7$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \[max = 10, i-- = 2\]
+    \centerline{no swap made}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    9 & 3 & \cellcolor{awesome}2 & 1 & 0 & 7 & 8 & 6 & 1 & 5 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex] (r){$9$}
+  child {
+    node [vertex, fill=awesome] (a) {$3$}
+    child {
+      node [vertex] {$1$}
+      child {node [vertex] {$6$}}
+      child {node [vertex] {$4$}}
+    }
+    child {
+      node [vertex, fill=awesome] {$0$}
+      child {node [vertex] {$5$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$2$}
+    child {
+      node [vertex] {$7$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \[max = 10, i-- = 1\]
+    \centerline{3 swaps with 0}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    9 & \cellcolor{awesome}3 & 2 & 1 & \cellcolor{awesome}0 & 7 & 8 & 6 & 1 & 5 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex, fill=awesome] (r){$9$}
+  child {
+    node [vertex, fill=awesome] (a) {$0$}
+    child {
+      node [vertex] {$1$}
+      child {node [vertex] {$6$}}
+      child {node [vertex] {$4$}}
+    }
+    child {
+      node [vertex] {$3$}
+      child {node [vertex] {$5$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$2$}
+    child {
+      node [vertex] {$7$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \[max = 10, i-- = 0\]
+    \centerline{9 swaps with 0}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    \cellcolor{awesome}9 & \cellcolor{awesome}0 & 2 & 1 & 3 & 7 & 8 & 6 & 1 & 5 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex] (r){$0$}
+  child {
+    node [vertex, fill=awesome] (a) {$9$}
+    child {
+      node [vertex, fill=awesome] {$1$}
+      child {node [vertex] {$6$}}
+      child {node [vertex] {$4$}}
+    }
+    child {
+      node [vertex] {$3$}
+      child {node [vertex] {$5$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$2$}
+    child {
+      node [vertex] {$7$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \[max = 10, i = 0\]
+    \centerline{9 swaps with 1}
+\label{tikz}
+
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    0 & \cellcolor{awesome}9 & 2 & \cellcolor{awesome}1 & 3 & 7 & 8 & 6 & 4 & 5 \\
+ \hline
+\end{tabular}
+\end{center}
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex] (r){$0$}
+  child {
+    node [vertex] (a) {$1$}
+    child {
+      node [vertex, fill=awesome] {$9$}
+      child {node [vertex] {$6$}}
+      child {node [vertex, fill=awesome] {$4$}}
+    }
+    child {
+      node [vertex] {$3$}
+      child {node [vertex] {$5$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$2$}
+    child {
+      node [vertex] {$7$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \[max = 10, i = 0\]
+    \centerline{9 swaps with 4}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    0 & 1 & 2 & \cellcolor{awesome}9 & 3 & 7 & 8 & 6 & \cellcolor{awesome} 4 & 5 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex] (r){$0$}
+  child {
+    node [vertex] (a) {$1$}
+    child {
+      node [vertex] {$4$}
+      child {node [vertex] {$6$}}
+      child {node [vertex] {$9$}}
+    }
+    child {
+      node [vertex] {$3$}
+      child {node [vertex] {$5$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$2$}
+    child {
+      node [vertex] {$7$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{final heap}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    0 & 1 & 2 & 4 & 3 & 7 & 8 & 6 & 9 & 5 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+
+\end{preview}
+\end{document}
+
+

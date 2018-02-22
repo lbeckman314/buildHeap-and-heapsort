@@ -1,0 +1,657 @@
+% source: https://github.com/MartinThoma/LaTeX-examples/blob/master/tikz/binary-tree/binary-tree.tex
+% by MartinThoma
+
+\documentclass{article}
+\usepackage[pdftex,active,tightpage]{preview}
+\setlength\PreviewBorder{2mm}
+
+% https://www.sharelatex.com/learn/Tables
+\usepackage{tabu}
+
+% https://www.sharelatex.com/learn/Tables
+\usepackage[table]{xcolor}
+
+% https://tex.stackexchange.com/questions/309833/format-whole-row-of-table-as-bold
+\newcommand\setrow[1]{\gdef\rowmac{#1}#1\ignorespaces}
+\newcommand\clearrow{\global\let\rowmac\relax}
+\clearrow
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning, calc}
+\tikzstyle{vertex}=[draw,fill=black!15,circle,minimum size=20pt,inner sep=0pt]
+
+% latexcolor.com
+\definecolor{awesome}{rgb}{1.0, 0.13, 0.32}
+\definecolor{azure}{rgb}{0.0, 0.5, 1.0}
+
+\begin{document}
+\begin{preview}
+
+
+
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex] (r){$9$}
+  child {
+    node [vertex] (a) {$3$}
+    child {
+      node [vertex] {$4$}
+      child {node [vertex] {$6$}}
+      child {node [vertex] {$1$}}
+    }
+    child {
+      node [vertex] {$5$}
+      child {node [vertex] {$0$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$2$}
+    child {
+      node [vertex] {$7$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{initial binary tree}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    9 & 3 & 2 & 4 & 5 & 7 & 8 & 6 & 1 & 0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+\label{tikz}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex] (r){$0$}
+  child {
+    node [vertex] (a) {$1$}
+    child {
+      node [vertex] {$4$}
+      child {node [vertex] {$6$}}
+      child {node [vertex] {$9$}}
+    }
+    child {
+      node [vertex] {$3$}
+      child {node [vertex] {$5$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$2$}
+    child {
+      node [vertex] {$7$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{unsorted heap}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    0 & 1 & 2 & 4 & 3 & 7 & 8 & 6 & 9 & 5 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex, fill=awesome] (r){$0$}
+  child {
+    node [vertex] (a) {$1$}
+    child {
+      node [vertex] {$4$}
+      child {node [vertex] {$6$}}
+      child {node [vertex] {$9$}}
+    }
+    child {
+      node [vertex] {$3$}
+      child {node [vertex, fill=awesome] {$5$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$2$}
+    child {
+      node [vertex] {$7$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{remove 0 and readjust}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    \cellcolor{awesome}0 & 1 & 2 & 4 & 3 & 7 & 8 & 6 & 9 & \cellcolor{awesome}5 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex, fill=awesome] (r){$1$}
+  child {
+    node [vertex] (a) {$3$}
+    child {
+      node [vertex] {$4$}
+      child {node [vertex] {$6$}}
+      child {node [vertex, fill=awesome] {$9$}}
+    }
+    child {
+      node [vertex] {$5$}
+      child {node [vertex, fill=azure] {$0$}} 
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$2$}
+    child {
+      node [vertex] {$7$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{remove 1 and readjust}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c||>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    \cellcolor{awesome}1 & 3 & 2 & 4 & 5 & 7 & 8 & 6 & \cellcolor{awesome}9 & \cellcolor{azure}0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex, fill=awesome] (r){$2$}
+  child {
+    node [vertex] (a) {$3$}
+    child {
+      node [vertex] {$4$}
+      child {node [vertex, fill=awesome] {$6$}}
+      child {node [vertex, fill=azure] {$1$}}
+    }
+    child {
+      node [vertex] {$5$}
+      child {node [vertex, fill=azure] {$0$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$7$}
+    child {
+      node [vertex] {$9$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{remove 2 and readjust}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c||>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    \cellcolor{awesome}2 & 3 & 7 & 4 & 5 & 9 & 8 & \cellcolor{awesome}6 & \cellcolor{azure}1 & \cellcolor{azure}0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex, fill=awesome] (r){$3$}
+  child {
+    node [vertex] (a) {$4$}
+    child {
+      node [vertex] {$6$}
+      child {node [vertex, fill=azure] {$2$}}
+      child {node [vertex, fill=azure] {$1$}}
+    }
+    child {
+      node [vertex] {$5$}
+      child {node [vertex, fill=azure] {$0$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$7$}
+    child {
+      node [vertex] {$9$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex, fill=awesome] {$8$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{remove 3 and readjust}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    \cellcolor{awesome}3 & 4 & 7 & 6 & 5 & 9 & \cellcolor{awesome}8 & \cellcolor{azure}2 & \cellcolor{azure}1 & \cellcolor{azure}0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex, fill=awesome] (r){$4$}
+  child {
+    node [vertex] (a) {$5$}
+    child {
+      node [vertex] {$6$}
+      child {node [vertex, fill=azure] {$2$}}
+      child {node [vertex, fill=azure] {$1$}}
+    }
+    child {
+      node [vertex] {$8$}
+      child {node [vertex, fill=azure] {$0$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$7$}
+    child {
+      node [vertex, fill=awesome] {$9$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex, fill=azure] {$3$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{remove 4 and readjust}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    \cellcolor{awesome}4 & 5 & 7 & 6 & 8 & \cellcolor{awesome}9 & \cellcolor{azure}3 & \cellcolor{azure}2 & \cellcolor{azure}1 & \cellcolor{azure}0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex, fill=awesome] (r){$5$}
+  child {
+    node [vertex] (a) {$6$}
+    child {
+      node [vertex] {$9$}
+      child {node [vertex, fill=azure] {$2$}}
+      child {node [vertex, fill=azure] {$1$}}
+    }
+    child {
+      node [vertex, fill=awesome] {$8$}
+      child {node [vertex, fill=azure] {$0$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$7$}
+    child {
+      node [vertex, fill=azure] {$4$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex, fill=azure] {$3$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{remove 5 and readjust}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    \cellcolor{awesome}5 & 6 & 7 & 9 & \cellcolor{awesome}8 & \cellcolor{azure}4 & \cellcolor{azure}3 & \cellcolor{azure}2 & \cellcolor{azure}1 & \cellcolor{azure}0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex, fill=awesome] (r){$6$}
+  child {
+    node [vertex] (a) {$8$}
+    child {
+      node [vertex, fill=awesome] {$9$}
+      child {node [vertex, fill=azure] {$2$}}
+      child {node [vertex, fill=azure] {$1$}}
+    }
+    child {
+      node [vertex, fill=azure] {$5$}
+      child {node [vertex, fill=azure] {$0$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex] {$7$}
+    child {
+      node [vertex, fill=azure] {$4$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex, fill=azure] {$3$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{remove 6 and readjust}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    \cellcolor{awesome}6 & 8 & 7 & \cellcolor{awesome}9 & \cellcolor{azure}5 & \cellcolor{azure}4 & \cellcolor{azure}3 & \cellcolor{azure}2 & \cellcolor{azure}1 & \cellcolor{azure}0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex, fill=awesome] (r){$7$}
+  child {
+    node [vertex] (a) {$8$}
+    child {
+      node [vertex, fill=azure] {$6$}
+      child {node [vertex, fill=azure] {$2$}}
+      child {node [vertex, fill=azure] {$1$}}
+    }
+    child {
+      node [vertex, fill=azure] {$5$}
+      child {node [vertex, fill=azure] {$0$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex, fill=awesome] {$9$}
+    child {
+      node [vertex, fill=azure] {$4$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex, fill=azure] {$3$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{remove 7 and readjust}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    \cellcolor{awesome}7 & 8 & \cellcolor{awesome}9 & \cellcolor{azure}6 & \cellcolor{azure}5 & \cellcolor{azure}4 & \cellcolor{azure}3 & \cellcolor{azure}2 & \cellcolor{azure}1 & \cellcolor{azure}0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex, fill=awesome] (r){$8$}
+  child {
+    node [vertex, fill=awesome] (a) {$9$}
+    child {
+      node [vertex, fill=azure] {$6$}
+      child {node [vertex, fill=azure] {$2$}}
+      child {node [vertex, fill=azure] {$1$}}
+    }
+    child {
+      node [vertex, fill=azure] {$5$}
+      child {node [vertex, fill=azure] {$0$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex, fill=azure] {$7$}
+    child {
+      node [vertex, fill=azure] {$4$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex, fill=azure] {$3$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{remove 8 and readjust}
+\label{tikz}
+
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    \cellcolor{awesome}8 & \cellcolor{awesome}9 & \cellcolor{azure}7 & \cellcolor{azure}6 & \cellcolor{azure}5 & \cellcolor{azure}4 & \cellcolor{azure}3 & \cellcolor{azure}2 & \cellcolor{azure}1 & \cellcolor{azure}0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex, fill=awesome] (r){$9$}
+  child {
+    node [vertex, fill=azure] (a) {$8$}
+    child {
+      node [vertex, fill=azure] {$6$}
+      child {node [vertex, fill=azure] {$2$}}
+      child {node [vertex, fill=azure] {$1$}}
+    }
+    child {
+      node [vertex, fill=azure] {$5$}
+      child {node [vertex, fill=azure] {$0$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex, fill=azure] {$7$}
+    child {
+      node [vertex, fill=azure] {$4$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex, fill=azure] {$3$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{remove 9 and readjust}
+\label{tikz}
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c||>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    \cellcolor{awesome}9 & \cellcolor{azure}8 & \cellcolor{azure}7 & \cellcolor{azure}6 & \cellcolor{azure}5 & \cellcolor{azure}4 & \cellcolor{azure}3 & \cellcolor{azure}2 & \cellcolor{azure}1 & \cellcolor{azure}0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+% ------------------------------------------- %
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\\~\\
+
+\begin{tikzpicture}[very thick,level/.style={sibling distance=60mm/#1}]
+\node [vertex, fill=azure] (r){$9$}
+  child {
+    node [vertex, fill=azure] (a) {$8$}
+    child {
+      node [vertex, fill=azure] {$6$}
+      child {node [vertex, fill=azure] {$2$}}
+      child {node [vertex, fill=azure] {$1$}}
+    }
+    child {
+      node [vertex, fill=azure] {$5$}
+      child {node [vertex, fill=azure] {$0$}}
+      child [missing]
+    }
+  }
+  child {
+    node [vertex, fill=azure] {$7$}
+    child {
+      node [vertex, fill=azure] {$4$}
+      child [missing]
+      child [missing]
+    }
+    child {
+      node [vertex, fill=azure] {$3$}
+      child [missing]
+      child [missing]
+    }
+  };
+\end{tikzpicture}
+    \centerline{sorted array}
+\label{tikz}
+
+\begin{center}
+\begin{tabular}{ |>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c|>{\rowmac}c <{\clearrow}| }
+ \hline
+ \setrow{\itshape}0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+ \hline
+    \cellcolor{azure}9 & \cellcolor{azure}8 & \cellcolor{azure}7 & \cellcolor{azure}6 & \cellcolor{azure}5 & \cellcolor{azure}4 & \cellcolor{azure}3 & \cellcolor{azure}2 & \cellcolor{azure}1 & \cellcolor{azure}0 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+\end{preview}
+\end{document}
+
+
